@@ -21,10 +21,13 @@ import java.io.IOException;
 // TODO : css styling
 
 // TODO : remove page
-// TODO : add tags to pages
+// TODO : add tags to
+// TODO : search by tags
 // TODO : add search by tags
 // TODO : add search by text
 // TODO : add search by date
+
+// TODO : order page by date
 
 // TODO : input image into pages
 
@@ -36,8 +39,12 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home.fxml"));
+
+        Notebook book = (new Notebook()).createDemoNotebook();
+        fxmlLoader.setControllerFactory(iC -> new HomeController(book));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+
+        stage.setTitle("Notebook");
         stage.setScene(scene);
         stage.show();
     }

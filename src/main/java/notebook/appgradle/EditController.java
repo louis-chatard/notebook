@@ -16,13 +16,19 @@ public class EditController implements Observer {
     @FXML
     private Label labeltest;
 
+
     public void editPage(Page page) {
+        labeltest.setText("Edition mode");
+        if (page == null) {
+            this.page = new Page();
+        } else {
+            this.page = page;
+        }
         titleField.setText(page.getTitle());
         descriptionField.setText(page.getDescription());
         textField.setText(page.getText());
-        labeltest.setText("Edition mode");
-
     }
+
     public void createPage() {
         this.page = new Page();
         editPage(this.page);
@@ -30,9 +36,14 @@ public class EditController implements Observer {
 
     }
 
+    public void save() {}
     @Override
     public void update() {
+        textField.setText(page.getText());
+        descriptionField.setText(page.getDescription());
+        titleField.setText(page.getTitle());
         labeltest.setUnderline(true);
     }
+
 
 }
