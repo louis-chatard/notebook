@@ -6,12 +6,13 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" fx:controller="notebook.appgradle.Controller" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notebook.appgradle.PageController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
             <Button mnemonicParsing="false" text="Previous" />
-            <Button mnemonicParsing="false" onAction="#switchToEditPage" text="Edit Page" />
+            <Button mnemonicParsing="false" onAction="#editPage" text="Edit Page" />
+            <Button mnemonicParsing="false" onAction="#newPage" text="New Page" />
             <MenuButton mnemonicParsing="false" text="Edit">
                <items>
                    <MenuItem mnemonicParsing="false" text="Change Illustration" />
@@ -20,6 +21,7 @@
                    <MenuItem mnemonicParsing="false" text="Change Text" />
                </items>
             </MenuButton>
+            <Button mnemonicParsing="false" onAction="#goToHome" text="Go Home" />
             <Button mnemonicParsing="false" text="Next" />
            </items>
        </ToolBar>

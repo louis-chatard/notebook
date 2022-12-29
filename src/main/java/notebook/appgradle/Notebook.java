@@ -1,16 +1,16 @@
 package notebook.appgradle;
 
+import java.util.ArrayList;
+
 public class Notebook extends Observable {
-    private String text = "";
-    public String getText() {
-        return text;
-    }
-    public void setText(String text) {
-        this.text = text;
-        notifyObservers();
-    }
+    private ArrayList<Page> pages;
+    private int currentPage;
 
     public Notebook() {
-        addObserver(new Controller());
+        pages = new ArrayList<Page>();
+        pages.add(new Page());
+        currentPage = 0;
+        addObserver(new PageController());
     }
+
 }

@@ -4,11 +4,12 @@ import notebook.appgradle.Notebook;
 
 public abstract class Command {
 
-    private Notebook notebook;
+    public Notebook notebook;
 
-    protected Command(Notebook book) {
+    public Command(Notebook book) {
         this.notebook = book;
     }
+
 
     public abstract void execute();
 
