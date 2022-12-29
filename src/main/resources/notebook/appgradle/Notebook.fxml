@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notebook.appgradle.Controller">
+    <AnchorPane maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+      <children>
+         <VBox maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+               <ToolBar prefHeight="40.0" prefWidth="200.0">
+                 <items>
+                   <Button mnemonicParsing="false" onAction="#PrevPage" text="Previous" />
+                   <MenuButton mnemonicParsing="false" text="Edit">
+                     <items>
+                       <MenuItem mnemonicParsing="false" text="Change Illustration" />
+                       <MenuItem mnemonicParsing="false" text="Change Title" />
+                           <MenuItem mnemonicParsing="false" text="Change Description" />
+                           <MenuItem mnemonicParsing="false" text="Change Text" />
+                     </items>
+                   </MenuButton>
+                     <Pane prefHeight="30.0" prefWidth="388.0" />
+                   <Button mnemonicParsing="false" onAction="#NextPage" text="Next" />
+                 </items>
+               </ToolBar>
+               <ImageView accessibleText="image" fitHeight="113.0" fitWidth="177.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../Images/index.jpeg" />
+                  </image></ImageView>
+               <Label text="Lorem Ipsum">
+                  <font>
+                     <Font size="36.0" />
+                  </font></Label>
+               <Label text="Voyage du 18 décembre au 23 décembre 2022 - Nancy">
+                  <font>
+                     <Font size="14.0" />
+                  </font></Label>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam. Integer quis metus vitae elit lobortis egestas. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vel erat non mauris convallis vehicula. Nulla et sapien. Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat. Proin feugiat, augue non elementum posuere, metus purus iaculis lectus, et tristique ligula justo vitae magna.Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac euismod nibh nisl eu lectus. Fusce vulputate sem at sapien. Vivamus leo. Aliquam euismod libero eu enim. Nulla nec felis sed leo placerat imperdiet. Aenean suscipit nulla in justo. Suspendisse cursus rutrum augue. Nulla tincidunt tincidunt mi. Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum augue, et ultricies lacus lorem varius purus. Curabitur eu amet." wrappingWidth="600" />
+            </children>
+         </VBox>
+      </children></AnchorPane>
+</Scene>
