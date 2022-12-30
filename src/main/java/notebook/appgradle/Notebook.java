@@ -5,10 +5,8 @@ import java.util.List;
 
 public class Notebook extends Observable {
     private ArrayList<Page> pages;
-    private int currentPage;
     public Notebook() {
         pages = new ArrayList<Page>();
-        currentPage = 0;
     }
 
     public void addPage(Page page) {
@@ -18,6 +16,9 @@ public class Notebook extends Observable {
     }
     public List<Page> getPages() {
         return pages;
+    }
+    public Page getPage(int index) {
+        return pages.get(index-1);
     }
 
     public void updatePage(int pageNumber,Page page) {
@@ -39,12 +40,4 @@ public class Notebook extends Observable {
         }
         return notebook;
     }
-
-    public void showNotebook() {
-        System.out.println("Notebook:");
-        for (Page page : pages) {
-            System.out.println(page.getTitle());
-        }
-    }
-
 }

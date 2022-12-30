@@ -13,6 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import notebook.appgradle.commands.Command;
+import notebook.appgradle.commands.GoNewPageCommand;
+import notebook.appgradle.commands.GoToPageCommand;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,19 +23,11 @@ import java.util.ResourceBundle;
 
 
 public class HomeController implements Observer, Initializable {
-    private Parent root;
-    private Scene newScene;
-    private Stage stage;
     private Notebook notebook;
-
-    @FXML
-    private Label tester;
     @FXML
     private Button newPage;
     @FXML
     public GridPane listPages;
-    @FXML
-    private Button editPage;
 
     public HomeController(Notebook notebook) {
         this.notebook = notebook;
@@ -40,7 +35,6 @@ public class HomeController implements Observer, Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         notebook.addObserver(this);
-        notebook.showNotebook();
         update();
     }
 
@@ -54,7 +48,7 @@ public class HomeController implements Observer, Initializable {
             button.setMnemonicParsing(false);
             button.setOnAction(event -> {
                 try {
-                    goToPage(event, page.getPageNumber());
+                    goToPage(page.getPageNumber());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -73,34 +67,14 @@ public class HomeController implements Observer, Initializable {
         }
     }
 
-    public void newPageFromHome(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editPage.fxml"));
-
-        Page newPage = new Page(this.notebook);
-        notebook.addPage(newPage);
-        newPage.setPageNumber(notebook.getPages().size());
-        fxmlLoader.setControllerFactory(iC -> new EditController(newPage, this.notebook));
-        newScene = new Scene(fxmlLoader.load());
-
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(newScene);
-        stage.show();
+    public void executeCommand(Command command) throws IOException {
+        command.execute();
     }
-
-    public void goToPage(ActionEvent event, int pageNumber) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("notebookPage.fxml"));
-
-        System.out.println("Page number searched: "+pageNumber);
-        System.out.println("Page number found: "+notebook.getPages().get(pageNumber-1).getPageNumber());
-        Page page = notebook.getPages().get(pageNumber-1);
-        fxmlLoader.setControllerFactory(iC -> new PageController(page));
-        newScene = new Scene(fxmlLoader.load());
-
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle(page.getTitle());
-        stage.setScene(newScene);
-        stage.show();
+    public void newPageFromHome() throws IOException {
+        executeCommand(new GoNewPageCommand(notebook, null));
+    }
+    public void goToPage(int pageNumber) throws IOException {
+        Page objective = notebook.getPage(pageNumber);
+        executeCommand(new GoToPageCommand(notebook, objective));
         }
-
-
-}
+};

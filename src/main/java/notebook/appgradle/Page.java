@@ -1,5 +1,7 @@
 package notebook.appgradle;
 
+import java.time.LocalDate;
+
 public class Page extends Observable {
 
     private Notebook notebook;
@@ -8,6 +10,8 @@ public class Page extends Observable {
     private String text;
     private String imageURL;
     private int pageNumber;
+    private LocalDate beginDate;
+    private LocalDate endDate;
 
     public Page(Notebook notebook) {
         this.notebook = notebook;
@@ -15,6 +19,7 @@ public class Page extends Observable {
         this.description = "Short description of the trip";
         this.text = "Explain more precisely what you have done";
         this.imageURL = "";
+        this.pageNumber = -1;
     }
     public Page(Notebook notebook, String title, String description, String text, String imageURL) {
         this.notebook = notebook;
@@ -43,6 +48,12 @@ public class Page extends Observable {
     public Notebook getNotebook() {
         return this.notebook;
     }
+    public LocalDate getBeginDate() {
+        return this.beginDate;
+    }
+    public LocalDate getEndDate() {
+        return this.endDate;
+    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -62,10 +73,14 @@ public class Page extends Observable {
     public void setNotebook(Notebook notebook) {
         this.notebook = notebook;
     }
+    public void setBeginDate(LocalDate beginDate) {
+        this.beginDate = beginDate;
+    }
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
 
-    public void showDates() {
-        if (description.length() > 40) {
-            System.out.println(description.substring(14, 24) + " - " + description.substring(32, 42));
-        }
+    public boolean isEmpty() {
+        return title.equals("Name your trip") && description.equals("Short description of the trip") && text.equals("Explain more precisely what you have done");
     }
 }

@@ -1,31 +1,19 @@
 package notebook.appgradle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import notebook.appgradle.commands.Command;
+import notebook.appgradle.commands.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class PageController implements Observer, Initializable {
     private Notebook notebook;
-    private Stage stage;
-    private Scene newScene;
-    private Parent root;
     private Page page;
-    private FileChooser fileChooser = new FileChooser();
     @FXML
     private Label textLabel;
     @FXML
@@ -47,8 +35,6 @@ public class PageController implements Observer, Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         page.addObserver(this);
-        notebook.showNotebook();
-        page.showDates();
         update();
     }
     @Override
@@ -57,54 +43,29 @@ public class PageController implements Observer, Initializable {
         this.titleLabel.setText(page.getTitle());
         this.descriptionLabel.setText(page.getDescription());
         this.textLabel.setText(page.getText());
-        this.pageNumberLabel.setText("Page " + (notebook.getPages().indexOf(page) + 1));
+        this.pageNumberLabel.setText("Page " + page.getPageNumber());
     }
 
-
-    public void editPage(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editPage.fxml"));
-
-        fxmlLoader.setControllerFactory(iC -> new EditController(page, this.notebook));
-        newScene = new Scene(fxmlLoader.load());
-
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle(page.getTitle()+" - Edit");
-        stage.setScene(newScene);
-        stage.show();
+    public void executeCommand(Command command) throws IOException {
+        command.execute();
     }
-    public void newPage(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editPage.fxml"));
 
-        Page newPage = new Page(this.notebook);
-        notebook.addPage(newPage);
-        newPage.setPageNumber(notebook.getPages().size());
-        fxmlLoader.setControllerFactory(iC -> new EditController(newPage, this.notebook));
-        newScene = new Scene(fxmlLoader.load());
-
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("New Page");
-        stage.setScene(newScene);
-        stage.show();
+    public void editPage() throws IOException {
+        executeCommand(new EditPageCommand(notebook, page));
     }
-    public void goToHome(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home.fxml"));
-
-        fxmlLoader.setControllerFactory(iC -> new HomeController(notebook));
-        newScene = new Scene(fxmlLoader.load());
-
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("Notebook");
-        stage.setScene(newScene);
-        stage.show();
-
+    public void newPage() throws IOException {
+        executeCommand(new GoNewPageCommand(notebook, null));
     }
-    public void nextPage(ActionEvent event) {
+    public void goToHome() throws IOException {
+        executeCommand(new GoHomeCommand(notebook, page));
+    }
+    public void nextPage() {
         if (page.getPageNumber() < notebook.getPages().size()) {
             page = notebook.getPages().get(page.getPageNumber());
             update();
         }
     }
-    public void previousPage(ActionEvent event) {
+    public void previousPage() {
         if (page.getPageNumber() > 1) {
             page = notebook.getPages().get(page.getPageNumber()-2);
             update();
@@ -121,6 +82,8 @@ public class PageController implements Observer, Initializable {
             nextPageButton.setVisible(true);
         }
     }
+
+    /*
     public void readFile(int pageNumber) {
         String fileName = "pages/page" + pageNumber + ".txt";
         File file = fileChooser.showOpenDialog(new Stage());
@@ -138,4 +101,6 @@ public class PageController implements Observer, Initializable {
         }
 
     }
+
+     */
 }

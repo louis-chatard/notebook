@@ -35,18 +35,28 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     public static CommandHistory history = new CommandHistory();
-    public Notebook notebook = (new Notebook()).createDemoNotebook();
+    public static Notebook notebook = (new Notebook()).createDemoNotebook();
+    public static Scene mainScene;
+    public static Stage mainStage;
 
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home.fxml"));
 
         fxmlLoader.setControllerFactory(iC -> new HomeController(notebook));
-        Scene scene = new Scene(fxmlLoader.load());
+        //Scene scene = new Scene(fxmlLoader.load());
 
+        mainScene = new Scene(fxmlLoader.load());
+        mainStage = stage;
+        mainStage.setTitle("test");
+        mainStage.setScene(mainScene);
+        mainStage.show();
+/*
         stage.setTitle("Notebook");
         stage.setScene(scene);
         stage.show();
+
+ */
     }
 
     public static void main(String[] args) {
