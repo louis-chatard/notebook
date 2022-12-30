@@ -3,6 +3,7 @@ package notebook.appgradle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,9 +15,11 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class HomeController implements Observer {
+public class HomeController implements Observer, Initializable {
     private Parent root;
     private Scene newScene;
     private Stage stage;
@@ -34,10 +37,10 @@ public class HomeController implements Observer {
     public HomeController(Notebook notebook) {
         this.notebook = notebook;
     }
-
-    // TODO : enter button which call update
-    public void enterNotebook() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         notebook.addObserver(this);
+        notebook.showNotebook();
         update();
     }
 
@@ -68,46 +71,18 @@ public class HomeController implements Observer {
                 row++;
             }
         }
-
-/*
-            for (int i = 0; i <row ; i++) {
-                for (int j = 0; j < col; j++) {
-                    System.out.println("i = " + i + " j = " + j);
-                    Button button = new Button(page.getTitle());
-                    listPages.add(button, j, i);
-                }
-            }   */
-/*
-            if (i == row) {
-
-                i = 0;
-            }
-            if (j == col) {
-                break;
-            }
-            while (i < row) {
-                while (j < col) {
-                    Button button = new Button(page.getTitle());
-                    listPages.add(button, j, i);
-                    j++;
-                }
-                i++;
-            }
-     */
-
     }
 
     public void newPageFromHome(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("editPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editPage.fxml"));
 
-        root = loader.load();
-
-        EditController editController = loader.getController();
-        editController.createPage();
-        editController.update();
+        Page newPage = new Page(this.notebook);
+        notebook.addPage(newPage);
+        newPage.setPageNumber(notebook.getPages().size());
+        fxmlLoader.setControllerFactory(iC -> new EditController(newPage, this.notebook));
+        newScene = new Scene(fxmlLoader.load());
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        newScene = new Scene(root);
         stage.setScene(newScene);
         stage.show();
     }
@@ -115,7 +90,9 @@ public class HomeController implements Observer {
     public void goToPage(ActionEvent event, int pageNumber) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("notebookPage.fxml"));
 
-        Page page = notebook.getPages().get(pageNumber);
+        System.out.println("Page number searched: "+pageNumber);
+        System.out.println("Page number found: "+notebook.getPages().get(pageNumber-1).getPageNumber());
+        Page page = notebook.getPages().get(pageNumber-1);
         fxmlLoader.setControllerFactory(iC -> new PageController(page));
         newScene = new Scene(fxmlLoader.load());
 
@@ -124,4 +101,6 @@ public class HomeController implements Observer {
         stage.setScene(newScene);
         stage.show();
         }
+
+
 }

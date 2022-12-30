@@ -35,13 +35,13 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     public static CommandHistory history = new CommandHistory();
+    public Notebook notebook = (new Notebook()).createDemoNotebook();
 
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home.fxml"));
 
-        Notebook book = (new Notebook()).createDemoNotebook();
-        fxmlLoader.setControllerFactory(iC -> new HomeController(book));
+        fxmlLoader.setControllerFactory(iC -> new HomeController(notebook));
         Scene scene = new Scene(fxmlLoader.load());
 
         stage.setTitle("Notebook");

@@ -1,25 +1,29 @@
 package notebook.appgradle;
 
-public class Page {
+public class Page extends Observable {
 
+    private Notebook notebook;
     private String title;
     private String description;
     private String text;
     private String imageURL;
     private int pageNumber;
 
-    public Page() {
+    public Page(Notebook notebook) {
+        this.notebook = notebook;
         this.title = "Name your trip";
         this.description = "Short description of the trip";
         this.text = "Explain more precisely what you have done";
         this.imageURL = "";
     }
-    public Page(String title, String description, String text, String imageURL) {
+    public Page(Notebook notebook, String title, String description, String text, String imageURL) {
+        this.notebook = notebook;
         this.title = title;
         this.description = description;
         this.text = text;
         this.imageURL = imageURL;
     }
+
 
     public String getTitle() {
         return this.title;
@@ -35,6 +39,9 @@ public class Page {
     }
     public int getPageNumber() {
         return this.pageNumber;
+    }
+    public Notebook getNotebook() {
+        return this.notebook;
     }
 
     public void setTitle(String title) {
@@ -52,5 +59,13 @@ public class Page {
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
     }
+    public void setNotebook(Notebook notebook) {
+        this.notebook = notebook;
+    }
 
+    public void showDates() {
+        if (description.length() > 40) {
+            System.out.println(description.substring(14, 24) + " - " + description.substring(32, 42));
+        }
+    }
 }

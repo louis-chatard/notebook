@@ -5,19 +5,20 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notebook.appgradle.PageController">
+<AnchorPane fx:id="pageLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notebook.appgradle.PageController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-            <Button mnemonicParsing="false" text="Previous" />
+            <Button fx:id="previousPageButton" mnemonicParsing="false" onAction="#previousPage" text="Previous" />
             <Button mnemonicParsing="false" onAction="#editPage" text="Edit Page" />
             <Button mnemonicParsing="false" onAction="#newPage" text="New Page" />
             <Button mnemonicParsing="false" onAction="#goToHome" text="Go Home" />
-            <Button mnemonicParsing="false" text="Next" />
+            <Button fx:id="nextPageButton" mnemonicParsing="false" onAction="#nextPage" text="Next" />
            </items>
        </ToolBar>
-      <Label fx:id="title" layoutX="242.0" layoutY="51.0" text="titre" />
-      <Label fx:id="description" layoutX="213.0" layoutY="92.0" text="Descriptipon" />
-      <Label fx:id="text" layoutX="213.0" layoutY="142.0" text="Text " />
+      <Label fx:id="titleLabel" layoutX="242.0" layoutY="51.0" text="" />
+      <Label fx:id="descriptionLabel" layoutX="213.0" layoutY="92.0" text="" />
+      <Label fx:id="textLabel" layoutX="213.0" layoutY="142.0" text="" />
+      <Label fx:id="pageNumberLabel" layoutX="282.0" layoutY="370.0" text="Label" />
    </children>
 </AnchorPane>

@@ -3,83 +3,92 @@ package notebook.appgradle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import notebook.appgradle.commands.Command;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class PageController implements Observer {
+public class PageController implements Observer, Initializable {
+    private Notebook notebook;
     private Stage stage;
     private Scene newScene;
     private Parent root;
     private Page page;
     private FileChooser fileChooser = new FileChooser();
     @FXML
-    private Label text = new Label();
+    private Label textLabel;
     @FXML
-    private Label title = new Label();
+    private Label titleLabel;
     @FXML
-    private Label description = new Label();
+    private Label descriptionLabel;
+    @FXML
+    private Label pageNumberLabel;
+    @FXML
+    private Button previousPageButton;
+    @FXML
+    private Button nextPageButton;
+
 
     public PageController(Page page) {
         this.page = page;
-        title.setText(page.getTitle());
-        description.setText(page.getDescription());
-        text.setText(page.getText());
+        this.notebook = page.getNotebook();
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        page.addObserver(this);
+        notebook.showNotebook();
+        page.showDates();
         update();
-        /*
-        text.setText(page.getText());
-        title.setText(page.getTitle());
-        description.setText(page.getDescription());
-        */
+    }
+    @Override
+    public void update() {
+        hideUselessButtons();
+        this.titleLabel.setText(page.getTitle());
+        this.descriptionLabel.setText(page.getDescription());
+        this.textLabel.setText(page.getText());
+        this.pageNumberLabel.setText("Page " + (notebook.getPages().indexOf(page) + 1));
     }
 
-    private void executeCommand(Command command) {
-        command.execute();
-        HelloApplication.history.push(command);
-    }
 
     public void editPage(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("editPage.fxml"));
-        root = loader.load();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editPage.fxml"));
 
-        EditController editController = loader.getController();
-        editController.editPage(page);
-        editController.update();
+        fxmlLoader.setControllerFactory(iC -> new EditController(page, this.notebook));
+        newScene = new Scene(fxmlLoader.load());
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        newScene = new Scene(root);
-        stage.setTitle(page.getTitle() + " - Edit");
+        stage.setTitle(page.getTitle()+" - Edit");
         stage.setScene(newScene);
         stage.show();
-
     }
     public void newPage(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("editPage.fxml"));
-        root = loader.load();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editPage.fxml"));
 
-        EditController editController = loader.getController();
-        editController.createPage();
-        editController.update();
+        Page newPage = new Page(this.notebook);
+        notebook.addPage(newPage);
+        newPage.setPageNumber(notebook.getPages().size());
+        fxmlLoader.setControllerFactory(iC -> new EditController(newPage, this.notebook));
+        newScene = new Scene(fxmlLoader.load());
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        newScene = new Scene(root);
+        stage.setTitle("New Page");
         stage.setScene(newScene);
         stage.show();
-
     }
     public void goToHome(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home.fxml"));
 
-        Notebook notebook = (new Notebook()).createDemoNotebook();
         fxmlLoader.setControllerFactory(iC -> new HomeController(notebook));
         newScene = new Scene(fxmlLoader.load());
 
@@ -89,15 +98,29 @@ public class PageController implements Observer {
         stage.show();
 
     }
-    @Override
-    public void update() {
-        title.setText("woohoo un titre");
-        description.setText(page.getDescription());
-        text.setText(page.getText());
-        // to complete
+    public void nextPage(ActionEvent event) {
+        if (page.getPageNumber() < notebook.getPages().size()) {
+            page = notebook.getPages().get(page.getPageNumber());
+            update();
+        }
+    }
+    public void previousPage(ActionEvent event) {
+        if (page.getPageNumber() > 1) {
+            page = notebook.getPages().get(page.getPageNumber()-2);
+            update();
+        }
     }
 
-
+    public void hideUselessButtons() {
+        if (page.getPageNumber() == 1) {
+            previousPageButton.setVisible(false);
+        } else if (page.getPageNumber() == notebook.getPages().size()) {
+            nextPageButton.setVisible(false);
+        } else {
+            previousPageButton.setVisible(true);
+            nextPageButton.setVisible(true);
+        }
+    }
     public void readFile(int pageNumber) {
         String fileName = "pages/page" + pageNumber + ".txt";
         File file = fileChooser.showOpenDialog(new Stage());
@@ -108,7 +131,7 @@ public class PageController implements Observer {
                 while(scanner.hasNextLine()){
                     content += scanner.nextLine() + "\n";
                 }
-                text.setText(content);
+                textLabel.setText(content);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
