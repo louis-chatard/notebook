@@ -19,6 +19,6 @@
       <Label fx:id="titleLabel" layoutX="242.0" layoutY="51.0" text="" />
       <Label fx:id="descriptionLabel" layoutX="213.0" layoutY="92.0" text="" />
       <Label fx:id="textLabel" layoutX="213.0" layoutY="142.0" text="" />
-      <Label fx:id="pageNumberLabel" layoutX="282.0" layoutY="370.0" text="Label" />
+      <Label fx:id="pageNumberLabel" layoutX="282.0" layoutY="370.0" />
    </children>
 </AnchorPane>

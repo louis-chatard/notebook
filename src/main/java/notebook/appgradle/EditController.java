@@ -2,11 +2,10 @@ package notebook.appgradle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import notebook.appgradle.commands.Command;
 import notebook.appgradle.commands.GoHomeCommand;
+import notebook.appgradle.commands.GoToPageCommand;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,13 +18,15 @@ public class EditController implements Observer, Initializable {
     @FXML
     private TextField titleField;
     @FXML
-    private TextField descriptionField;
+    private Label descriptionLabel;
     @FXML
     private TextArea textField;
     @FXML
     private DatePicker beginDate;
     @FXML
     private DatePicker endDate;
+    @FXML
+    private Button seePageButton;
 
 
     public EditController(Notebook notebook, Page page) {
@@ -40,7 +41,7 @@ public class EditController implements Observer, Initializable {
     @Override
     public void update() {
         titleField.setText(page.getTitle());
-        descriptionField.setText(page.getDescription());
+        descriptionLabel.setText(page.getDescription());
         textField.setText(page.getText());
         beginDate.setValue(page.getBeginDate());
         endDate.setValue(page.getEndDate());
@@ -76,5 +77,7 @@ public class EditController implements Observer, Initializable {
     public void goBackHome() throws IOException {
         executeCommand(new GoHomeCommand(notebook, page));
     }
-
+    public void goToCurrentPage() throws IOException {
+        executeCommand(new GoToPageCommand(notebook, page));
+    }
 }
