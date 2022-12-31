@@ -1,10 +1,10 @@
 package notebook.appgradle;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Page extends Observable {
+public class Page extends Observable implements Serializable {
 
-    private Notebook notebook;
     private String title;
     private String description;
     private String text;
@@ -13,16 +13,14 @@ public class Page extends Observable {
     private LocalDate beginDate;
     private LocalDate endDate;
 
-    public Page(Notebook notebook) {
-        this.notebook = notebook;
+    public Page() {
         this.title = "Name your trip";
         this.description = "Short description of the trip";
         this.text = "Explain more precisely what you have done";
         this.imageURL = "";
         this.pageNumber = -1;
     }
-    public Page(Notebook notebook, String title, String description, String text, String imageURL) {
-        this.notebook = notebook;
+    public Page(String title, String description, String text, String imageURL) {
         this.title = title;
         this.description = description;
         this.text = text;
@@ -44,9 +42,6 @@ public class Page extends Observable {
     }
     public int getPageNumber() {
         return this.pageNumber;
-    }
-    public Notebook getNotebook() {
-        return this.notebook;
     }
     public LocalDate getBeginDate() {
         return this.beginDate;
@@ -70,9 +65,7 @@ public class Page extends Observable {
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
     }
-    public void setNotebook(Notebook notebook) {
-        this.notebook = notebook;
-    }
+
     public void setBeginDate(LocalDate beginDate) {
         this.beginDate = beginDate;
     }

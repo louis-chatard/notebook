@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import notebook.appgradle.commands.Command;
 import notebook.appgradle.commands.GoNewPageCommand;
 import notebook.appgradle.commands.GoToPageCommand;
+import notebook.appgradle.commands.exitCommand;
 
 import java.io.IOException;
 import java.net.URL;
@@ -80,4 +81,7 @@ public class HomeController implements Observer, Initializable {
         Page objective = notebook.getPage(pageNumber);
         executeCommand(new GoToPageCommand(notebook, objective));
         }
+    public void quit() throws IOException {
+        executeCommand(new exitCommand());
+    }
 };

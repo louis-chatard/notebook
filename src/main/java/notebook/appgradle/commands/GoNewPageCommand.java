@@ -18,7 +18,7 @@ public class GoNewPageCommand extends Command {
     public void execute() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editPage.fxml"));
 
-        fxmlLoader.setControllerFactory(c -> new EditController(HelloApplication.notebook, new Page(HelloApplication.notebook)));
+        fxmlLoader.setControllerFactory(c -> new EditController(HelloApplication.notebook, new Page()));
         Scene newScene = new Scene(fxmlLoader.load());
         newScene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
 

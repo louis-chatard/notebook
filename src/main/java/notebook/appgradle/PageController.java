@@ -30,7 +30,6 @@ public class PageController implements Observer, Initializable {
 
     public PageController(Page page) {
         this.page = page;
-        this.notebook = page.getNotebook();
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,14 +59,14 @@ public class PageController implements Observer, Initializable {
         executeCommand(new GoHomeCommand(notebook, page));
     }
     public void nextPage() {
-        if (page.getPageNumber() < notebook.getPages().size()) {
-            page = notebook.getPages().get(page.getPageNumber());
+        if (page.getPageNumber() < HelloApplication.notebook.getPages().size()) {
+            page = HelloApplication.notebook.getPages().get(page.getPageNumber());
             update();
         }
     }
     public void previousPage() {
         if (page.getPageNumber() > 1) {
-            page = notebook.getPages().get(page.getPageNumber()-2);
+            page = HelloApplication.notebook.getPages().get(page.getPageNumber()-2);
             update();
         }
     }
@@ -75,32 +74,11 @@ public class PageController implements Observer, Initializable {
     public void hideUselessButtons() {
         if (page.getPageNumber() == 1) {
             previousPageButton.setVisible(false);
-        } else if (page.getPageNumber() == notebook.getPages().size()) {
+        } else if (page.getPageNumber() == HelloApplication.notebook.getPages().size()) {
             nextPageButton.setVisible(false);
         } else {
             previousPageButton.setVisible(true);
             nextPageButton.setVisible(true);
         }
     }
-
-    /*
-    public void readFile(int pageNumber) {
-        String fileName = "pages/page" + pageNumber + ".txt";
-        File file = fileChooser.showOpenDialog(new Stage());
-        String content = "";
-        if (file != null) {
-            try {
-                Scanner scanner = new Scanner(file);
-                while(scanner.hasNextLine()){
-                    content += scanner.nextLine() + "\n";
-                }
-                textLabel.setText(content);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-     */
 }

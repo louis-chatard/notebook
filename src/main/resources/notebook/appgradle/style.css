@@ -52,6 +52,10 @@
     -fx-border-color: #999988;
 }
 
+.newPage {
+    -fx-margin-left: auto;
+}
+
 .title {
     -fx-font-family: "Poppins", "Roboto Serif", arial, serif;
     -fx-font-size: 30px;

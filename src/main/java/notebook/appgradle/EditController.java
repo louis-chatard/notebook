@@ -46,10 +46,14 @@ public class EditController implements Observer, Initializable {
         beginDate.setValue(page.getBeginDate());
         endDate.setValue(page.getEndDate());
         HelloApplication.mainStage.setTitle(page.getTitle() + " - Edit");
+        if( page.isEmpty() ) {
+            seePageButton.setDisable(true);
+        } else {
+            seePageButton.setDisable(false);
+        }
     }
 
     public void save() {
-        page.setTitle(titleField.getText());
         // check if a date is entered
         if (beginDate.getValue() != null && endDate.getValue() != null) {
             page.setBeginDate(beginDate.getValue());
@@ -59,6 +63,7 @@ public class EditController implements Observer, Initializable {
             String date = "Trip from the " + beginString + " to the " + endString;
             page.setDescription(date);
         } else {
+            page.setTitle(titleField.getText());
             page.setText(textField.getText());
             if ( !page.isEmpty() ) {
                 if (page.getPageNumber() == -1) {
@@ -78,11 +83,7 @@ public class EditController implements Observer, Initializable {
         executeCommand(new GoHomeCommand(notebook, page));
     }
     public void goToCurrentPage() throws IOException {
-        if ( !page.isEmpty() ) {
-            executeCommand(new GoToPageCommand(notebook, page));
-        } else {
-            seePageButton.setDisable(true);
-        }
+        executeCommand(new GoToPageCommand(notebook, page));
     }
     public void delete() {
         notebook.removePage(page);

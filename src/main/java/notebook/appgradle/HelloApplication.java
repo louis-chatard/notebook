@@ -30,7 +30,7 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     public static CommandHistory history = new CommandHistory();
-    public static Notebook notebook = (new Notebook()).createDemoNotebook();
+    public static Notebook notebook = (new Notebook()).load();
     public static Scene mainScene;
     public static Stage mainStage;
 

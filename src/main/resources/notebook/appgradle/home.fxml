@@ -27,6 +27,12 @@
       </GridPane>
       <ToolBar fx:id="toolbar" prefHeight="40.0" prefWidth="576.0">
         <items>
+            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quit" text="Quit">
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="quit" />
+               </styleClass>
+            </Button>
             <Button fx:id="newPage" mnemonicParsing="false" onAction="#newPageFromHome" text="Add a trip">
                <styleClass>
                   <String fx:value="button" />
