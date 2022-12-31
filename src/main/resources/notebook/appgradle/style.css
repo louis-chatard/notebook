@@ -16,6 +16,7 @@
     -fx-text-fill: #ffffff;
     -fx-border-color: #9999cc;
     -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
 }
 
 .pageButton{
