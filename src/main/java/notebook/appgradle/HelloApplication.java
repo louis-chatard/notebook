@@ -9,7 +9,6 @@ import notebook.appgradle.commands.CommandHistory;
 import java.io.IOException;
 
 
-// TODO : store pages
 // TODO : jar !!
 
 // TODO : illustration pages tah LOREM ISPUM

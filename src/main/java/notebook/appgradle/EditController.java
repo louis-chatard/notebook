@@ -54,6 +54,8 @@ public class EditController implements Observer, Initializable {
     }
 
     public void save() {
+        page.setTitle(titleField.getText());
+        page.setText(textField.getText());
         // check if a date is entered
         if (beginDate.getValue() != null && endDate.getValue() != null) {
             page.setBeginDate(beginDate.getValue());
@@ -62,16 +64,13 @@ public class EditController implements Observer, Initializable {
             String endString = page.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             String date = "Trip from the " + beginString + " to the " + endString;
             page.setDescription(date);
-        } else {
-            page.setTitle(titleField.getText());
-            page.setText(textField.getText());
-            if ( !page.isEmpty() ) {
-                if (page.getPageNumber() == -1) {
-                    page.setPageNumber(notebook.getPages().size() + 1);
-                    notebook.addPage(page);
-                }
-                notebook.updatePage(page.getPageNumber(), page);
+        }
+        if ( !page.isEmpty() ) {
+            if (page.getPageNumber() == -1) {
+                page.setPageNumber(notebook.getPages().size() + 1);
+                notebook.addPage(page);
             }
+            notebook.updatePage(page.getPageNumber(), page);
         }
         update();
     }

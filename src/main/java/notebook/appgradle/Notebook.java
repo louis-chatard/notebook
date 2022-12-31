@@ -33,9 +33,19 @@ public class Notebook extends Observable implements java.io.Serializable {
 
     public void removePage(Page page) {
         int i = page.getPageNumber();
+        //deletePage(page);
         for (int j = i; j < pages.size() + 1; j++) {
             getPage(j).setPageNumber(j - 1);
+            savePage(getPage(j));
+            System.out.println("Page " + j + " saved");
         }
+        int index = pages.size();
+        getPage(index).setPageNumber(index - 1);
+        savePage(getPage(index));
+        System.out.println("index " + index + " - dernier page" + getPage(index).getPageNumber());
+
+        Page lastPage = pages.get(pages.size() - 1);
+        deletePage(lastPage);
         pages.remove(page);
         notifyObservers();
     }
@@ -87,6 +97,15 @@ public class Notebook extends Observable implements java.io.Serializable {
             return page;
         } else {
             return null;
+        }
+    }
+    public void deletePage(Page page) {
+        String path = "src/main/resources/notebook/appgradle/pages/page" + page.getPageNumber() + ".dat";
+        Path filePath = Paths.get(path);
+        try {
+            Files.delete(filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

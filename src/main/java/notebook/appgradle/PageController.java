@@ -43,6 +43,7 @@ public class PageController implements Observer, Initializable {
         this.descriptionLabel.setText(page.getDescription());
         this.textLabel.setText(page.getText());
         this.pageNumberLabel.setText("Page " + page.getPageNumber());
+        HelloApplication.mainStage.setTitle(page.getTitle());
     }
 
     public void executeCommand(Command command) throws IOException {
