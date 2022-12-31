@@ -15,6 +15,8 @@ import java.io.IOException;
 
 // TODO : fix remove page
 
+// TODO : disabled delete button on an empty page
+
 // TODO : add tags to page
 // TODO : search by tags
 // TODO : add search by tags

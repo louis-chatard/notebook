@@ -1,5 +1,6 @@
 package notebook.appgradle;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,24 +32,6 @@ public class Notebook extends Observable implements java.io.Serializable {
         return pages.get(index - 1);
     }
 
-    public void removePage(Page page) {
-        int i = page.getPageNumber();
-        //deletePage(page);
-        for (int j = i; j < pages.size() + 1; j++) {
-            getPage(j).setPageNumber(j - 1);
-            savePage(getPage(j));
-            System.out.println("Page " + j + " saved");
-        }
-        int index = pages.size();
-        getPage(index).setPageNumber(index - 1);
-        savePage(getPage(index));
-        System.out.println("index " + index + " - dernier page" + getPage(index).getPageNumber());
-
-        Page lastPage = pages.get(pages.size() - 1);
-        deletePage(lastPage);
-        pages.remove(page);
-        notifyObservers();
-    }
 
     public void updatePage(int pageNumber, Page page) {
         pages.set(pageNumber - 1, page);
@@ -78,7 +61,21 @@ public class Notebook extends Observable implements java.io.Serializable {
                 notebook.savePage(newPage);
                 pageNumber++;
             } else {
-                break;
+                newPage = loadPage(pageNumber + 1);
+                if ( newPage != null) {
+                    notebook.addPage(newPage);
+                    notebook.savePage(newPage);
+                    pageNumber++;
+                } else {
+                    newPage = loadPage(pageNumber + 2);
+                    if ( newPage != null ) {
+                        notebook.addPage(newPage);
+                        notebook.savePage(newPage);
+                        pageNumber++;
+                    } else {
+                        break;
+                    }
+                }
             }
         }
         return notebook;
@@ -99,13 +96,21 @@ public class Notebook extends Observable implements java.io.Serializable {
             return null;
         }
     }
-    public void deletePage(Page page) {
-        String path = "src/main/resources/notebook/appgradle/pages/page" + page.getPageNumber() + ".dat";
-        Path filePath = Paths.get(path);
-        try {
-            Files.delete(filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void removePage(Page page) {
+        int i = page.getPageNumber();
+        for (int j = i; j < pages.size() + 1; j++) {
+            getPage(j).setPageNumber(j - 1);
         }
+        pages.remove(page);
+        notifyObservers();
+    }
+
+    public void deletePageFile(Page page) {
+        String folderPath = "src/main/resources/notebook/appgradle/pages/";
+        int pageToDelete = page.getPageNumber();
+        File folder = new File(folderPath);
+
+        File pageFile = new File(folderPath + "page" + pageToDelete + ".dat");
+        pageFile.delete();
     }
 }

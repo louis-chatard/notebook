@@ -9,7 +9,7 @@ import javafx.scene.text.TextAlignment;
 import notebook.appgradle.commands.Command;
 import notebook.appgradle.commands.GoNewPageCommand;
 import notebook.appgradle.commands.GoToPageCommand;
-import notebook.appgradle.commands.exitCommand;
+import notebook.appgradle.commands.ExitCommand;
 
 import java.io.IOException;
 import java.net.URL;
@@ -75,7 +75,7 @@ public class HomeController implements Observer, Initializable {
         executeCommand(new GoToPageCommand(notebook, objective));
         }
     public void quit() throws IOException {
-        executeCommand(new exitCommand());
+        executeCommand(new ExitCommand());
     }
 
     public void createTemplate() {
@@ -85,7 +85,7 @@ public class HomeController implements Observer, Initializable {
                 "Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam. Integer quis metus vitae elit lobortis egestas. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vel erat non mauris convallis vehicula. Nulla et sapien. Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat. Proin feugiat, augue non elementum posuere, metus purus iaculis lectus, et tristique ligula justo vitae magna.\n" +
                 "Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac euismod nibh nisl eu lectus. Fusce vulputate sem at sapien. Vivamus leo. Aliquam euismod libero eu enim. Nulla nec felis sed leo placerat imperdiet. Aenean suscipit nulla in justo. Suspendisse cursus rutrum augue. Nulla tincidunt tincidunt mi. Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum augue, et ultricies lacus lorem varius purus. Curabitur eu amet.";
         for ( int i = 1; i < 11 ; i++ ) {
-            Page page = new Page("Trip" + i, "Enter trip dates", "Lorem Ipsum: " + i + loremIpsum, "");
+            Page page = new Page("Trip " + i, "Enter trip dates", "Lorem Ipsum: " + i + loremIpsum, "");
             page.setPageNumber(i);
             notebook.addPage(page);
             notebook.savePage(page);

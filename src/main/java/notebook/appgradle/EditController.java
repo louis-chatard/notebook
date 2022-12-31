@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import notebook.appgradle.commands.Command;
 import notebook.appgradle.commands.GoHomeCommand;
 import notebook.appgradle.commands.GoToPageCommand;
+import notebook.appgradle.commands.DeletePageCommand;
 
 import java.io.IOException;
 import java.net.URL;
@@ -84,12 +85,8 @@ public class EditController implements Observer, Initializable {
     public void goToCurrentPage() throws IOException {
         executeCommand(new GoToPageCommand(notebook, page));
     }
-    public void delete() {
-        notebook.removePage(page);
-        try {
-            goBackHome();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void delete() throws IOException {
+        executeCommand(new DeletePageCommand(notebook, page));
+        executeCommand(new GoHomeCommand(notebook, page));
     }
 }

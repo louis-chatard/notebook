@@ -1,7 +1,7 @@
 package notebook.appgradle.commands;
 
-public class exitCommand extends Command {
-    public exitCommand() {
+public class ExitCommand extends Command {
+    public ExitCommand() {
         super(null, null);
     }
     @Override
