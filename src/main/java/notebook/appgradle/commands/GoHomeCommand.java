@@ -23,7 +23,9 @@ public class GoHomeCommand extends Command {
 
         fxmlLoader.setControllerFactory(c -> new HomeController(HelloApplication.notebook));
         Scene newScene = new Scene(fxmlLoader.load());
+        newScene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
 
+        HelloApplication.mainStage.setResizable(false);
         HelloApplication.mainStage.setScene(newScene);
         HelloApplication.mainStage.setTitle("Home");
         HelloApplication.mainStage.show();

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="460.0" prefWidth="576.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notebook.appgradle.HomeController">
+<AnchorPane fx:id="pane" prefHeight="460.0" prefWidth="576.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notebook.appgradle.HomeController">
    <children>
-      <Button fx:id="newPage" layoutX="474.0" layoutY="20.0" mnemonicParsing="false" onAction="#newPageFromHome" text="Add a trip" />
       <GridPane fx:id="listPages" hgap="29.0" layoutX="58.0" layoutY="56.0" prefHeight="367.0" prefWidth="466.0" vgap="29.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -24,5 +25,15 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
+      <ToolBar fx:id="toolbar" prefHeight="40.0" prefWidth="576.0">
+        <items>
+            <Button fx:id="newPage" mnemonicParsing="false" onAction="#newPageFromHome" text="Add a trip">
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="newPage" />
+               </styleClass>
+            </Button>
+        </items>
+      </ToolBar>
    </children>
 </AnchorPane>

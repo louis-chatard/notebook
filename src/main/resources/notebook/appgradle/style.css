@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('./fonts/Poppins-Regular.ttf');
+}
+
+#pane{
+    -fx-background-color: #1B2B54;
+}
+
+.tool-bar{
+    -fx-background-color: #18264A;
+    }
+
+.button{
+    -fx-background-color: #14203F;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #9999cc;
+    -fx-border-radius: 7px;
+}
+
+.pageButton{
+    -fx-background-color: #aaafbf;
+    -fx-text-fill: black;
+    -fx-border-color: #9999cc;
+    -fx-border-radius: 7px;
+    -fx-border-width: 3px;
+    -fx-set-min-width: 50px;
+    -fx-set-min-height: 50px;
+}
+
+.label{
+    -fx-left-padding: 10px;
+    -fx-text-fill: #fbfbF0;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.field{
+    -fx-background-color: #1B2B54;
+    -fx-text-fill: #ffffff;
+    -fx-alignment: center;
+}
+
+.area{
+    -fx-font-family: "Poppins", "Roboto Serif", arial, serif;
+    -fx-font-size: 15px;
+    -fx-control-inner-background: #1B2B54;
+    -fx-text-fill: #ffffff;
+    -fx-text-alignment: justify;
+    -fx-alignment: center;
+    -fx-border-color: #999988;
+}
+
+.title {
+    -fx-font-family: "Poppins", "Roboto Serif", arial, serif;
+    -fx-font-size: 30px;
+    -fx-text-fill: #ffffff;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.description {
+    -fx-font-family: "Poppins", "Roboto Serif", arial, serif;
+    -fx-font-size: 18px;
+    -fx-text-fill: #ffffff;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+}
+
+#textLabel {
+    -fx-font-family: "Poppins", "Roboto Serif", arial, serif;
+    -fx-font-size: 16px;
+    -fx-text-fill: #ffffff;
+    -fx-text-alignment: justify;
+    -fx-wrap-text: true;
+}
+

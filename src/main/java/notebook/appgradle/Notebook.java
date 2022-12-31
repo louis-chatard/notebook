@@ -20,6 +20,10 @@ public class Notebook extends Observable {
     public Page getPage(int index) {
         return pages.get(index-1);
     }
+    public void removePage(Page page) {
+        pages.remove(page);
+        notifyObservers();
+    }
 
     public void updatePage(int pageNumber,Page page) {
         pages.set(pageNumber-1, page);

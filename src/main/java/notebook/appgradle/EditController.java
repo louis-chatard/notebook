@@ -45,7 +45,7 @@ public class EditController implements Observer, Initializable {
         textField.setText(page.getText());
         beginDate.setValue(page.getBeginDate());
         endDate.setValue(page.getEndDate());
-        HelloApplication.mainStage.setTitle(page.getTitle());
+        HelloApplication.mainStage.setTitle(page.getTitle() + " - Edit");
     }
 
     public void save() {
@@ -78,6 +78,18 @@ public class EditController implements Observer, Initializable {
         executeCommand(new GoHomeCommand(notebook, page));
     }
     public void goToCurrentPage() throws IOException {
-        executeCommand(new GoToPageCommand(notebook, page));
+        if ( !page.isEmpty() ) {
+            executeCommand(new GoToPageCommand(notebook, page));
+        } else {
+            seePageButton.setDisable(true);
+        }
+    }
+    public void delete() {
+        notebook.removePage(page);
+        try {
+            goBackHome();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

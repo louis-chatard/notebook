@@ -53,8 +53,11 @@ public class HomeController implements Observer, Initializable {
                     throw new RuntimeException(e);
                 }
             });
+            button.getStyleClass().add("pageButton");
             button.setPrefHeight(76.0);
+            button.setMinHeight(50.0);
             button.setPrefWidth(81.0);
+            button.setMinWidth(50.0);
             button.setTextAlignment(TextAlignment.CENTER);
             button.setWrapText(true);
 

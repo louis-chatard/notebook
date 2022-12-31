@@ -20,7 +20,9 @@ public class GoNewPageCommand extends Command {
 
         fxmlLoader.setControllerFactory(c -> new EditController(HelloApplication.notebook, new Page(HelloApplication.notebook)));
         Scene newScene = new Scene(fxmlLoader.load());
+        newScene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
 
+        HelloApplication.mainStage.setResizable(false);
         HelloApplication.mainStage.setScene(newScene);
         HelloApplication.mainStage.setTitle("New Page");
         HelloApplication.mainStage.show();

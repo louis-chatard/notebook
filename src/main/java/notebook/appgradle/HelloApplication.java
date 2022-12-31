@@ -10,13 +10,13 @@ import java.io.IOException;
 
 
 // TODO : store pages
+// TODO : jar !!
 
 // TODO : illustration pages tah LOREM ISPUM
 
-// TODO : css styling
+// TODO : fix remove page
 
-// TODO : remove page
-// TODO : add tags to
+// TODO : add tags to page
 // TODO : search by tags
 // TODO : add search by tags
 // TODO : add search by text
@@ -41,8 +41,9 @@ public class HelloApplication extends Application {
         fxmlLoader.setControllerFactory(iC -> new HomeController(notebook));
 
         mainScene = new Scene(fxmlLoader.load());
+        mainScene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         mainStage = stage;
-        mainStage.setTitle("test");
+        mainStage.setTitle("Notebook");
         mainStage.setScene(mainScene);
         mainStage.show();
     }

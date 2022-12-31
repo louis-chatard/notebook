@@ -21,7 +21,9 @@ public class EditPageCommand extends Command{
 
             fxmlLoader.setControllerFactory(c -> new EditController(HelloApplication.notebook, page));
             Scene newScene = new Scene(fxmlLoader.load());
+            newScene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
 
+            HelloApplication.mainStage.setResizable(false);
             HelloApplication.mainStage.setScene(newScene);
             HelloApplication.mainStage.setTitle(page.getTitle() + " - Edit");
             HelloApplication.mainStage.show();
