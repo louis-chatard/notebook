@@ -21,6 +21,10 @@ public class Notebook extends Observable {
         return pages.get(index-1);
     }
     public void removePage(Page page) {
+        int i = page.getPageNumber();
+        for (int j = i; j < pages.size()+1; j++) {
+            getPage(j).setPageNumber(j-1);
+        }
         pages.remove(page);
         notifyObservers();
     }
