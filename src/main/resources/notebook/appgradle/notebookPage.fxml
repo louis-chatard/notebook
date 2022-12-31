@@ -15,15 +15,15 @@
             <HBox minHeight="25.0" prefHeight="25.0" prefWidth="367.0" spacing="10.0">
                <children>
                   <Button fx:id="previousPageButton" mnemonicParsing="false" onAction="#previousPage" text="Previous" />
-                  <Button mnemonicParsing="false" onAction="#editPage" text="Edit Page" />
-                  <Button mnemonicParsing="false" onAction="#newPage" text="New Page" />
+                  <Button mnemonicParsing="false" onAction="#editPage" text="Edit Trip" />
+                  <Button mnemonicParsing="false" onAction="#newPage" text="New Trip" />
                   <Button mnemonicParsing="false" onAction="#goToHome" text="Go Home" />
                </children>
                <padding>
                   <Insets bottom="5.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox alignment="TOP_RIGHT" minHeight="25.0" prefHeight="25.0" prefWidth="215.0" styleClass="rightHBox" HBox.hgrow="ALWAYS">
+            <HBox alignment="TOP_RIGHT" minHeight="25.0" minWidth="54.0" prefHeight="34.0" prefWidth="125.0" styleClass="rightHBox" HBox.hgrow="ALWAYS">
                <children>
                   <Button fx:id="nextPageButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#nextPage" text="Next" />
                </children>

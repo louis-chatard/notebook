@@ -28,7 +28,8 @@ public class EditController implements Observer, Initializable {
     private DatePicker endDate;
     @FXML
     private Button seePageButton;
-
+    @FXML
+    private Button deletePageButton;
 
     public EditController(Notebook notebook, Page page) {
         this.notebook = notebook;
@@ -49,8 +50,10 @@ public class EditController implements Observer, Initializable {
         HelloApplication.mainStage.setTitle(page.getTitle() + " - Edit");
         if( page.isEmpty() ) {
             seePageButton.setDisable(true);
+            deletePageButton.setDisable(true);
         } else {
             seePageButton.setDisable(false);
+            deletePageButton.setDisable(false);
         }
     }
 

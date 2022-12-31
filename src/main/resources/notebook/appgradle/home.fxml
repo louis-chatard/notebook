@@ -57,6 +57,11 @@
             </HBox>
          </items>
       </ToolBar>
-      <Button fx:id="templateNotebookButton" layoutX="196.0" layoutY="423.0" mnemonicParsing="false" onAction="#createTemplate" text="Create template Notebook" />
+      <Button fx:id="templateNotebookButton" layoutX="196.0" layoutY="423.0" mnemonicParsing="false" onAction="#createTemplate" text="Create template Notebook">
+         <styleClass>
+            <String fx:value="button" />
+            <String fx:value="template" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>
